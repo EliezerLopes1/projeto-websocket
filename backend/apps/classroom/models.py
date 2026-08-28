@@ -2,18 +2,21 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import MinLengthValidator
 
+
 class User(models.Model):
     name = models.CharField(max_length=40, validators=[MinLengthValidator(3)])
+
 
 class Room(models.Model):
     name = models.CharField(max_length=40, validators=[MinLengthValidator(3)])
 
+
 class Connection(models.Model):
-    user = models.ForeignKey(User, related_name="connections")
-    room = models.ForeignKey(Room, related_name="connections")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="connections")
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="connections")
+
 
 class Message(models.Model):
     text = models.TextField(validators=[MinLengthValidator(3)])
-    date = models.DateTimeField(default=timezone.now())
+    date = models.TimeField(default=timezone.now())
     connection = models.ForeignKey(Connection, on_delete=models.CASCADE, related_name="messages")
-
