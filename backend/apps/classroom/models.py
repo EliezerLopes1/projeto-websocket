@@ -4,11 +4,11 @@ from django.core.validators import MinLengthValidator
 
 
 class User(models.Model):
-    name = models.CharField(max_length=40, validators=[MinLengthValidator(3)])
+    name = models.CharField(max_length=40, unique=True)
 
 
 class Room(models.Model):
-    name = models.CharField(max_length=40, validators=[MinLengthValidator(3)])
+    name = models.CharField(max_length=40, unique=True)
 
 
 class Connection(models.Model):
@@ -17,6 +17,6 @@ class Connection(models.Model):
 
 
 class Message(models.Model):
-    text = models.TextField(validators=[MinLengthValidator(3)])
-    date = models.TimeField(default=timezone.now())
+    text = models.TextField()
+    date = models.TimeField(default=timezone.now)
     connection = models.ForeignKey(Connection, on_delete=models.CASCADE, related_name="messages")
