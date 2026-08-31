@@ -9,11 +9,6 @@ class UserListSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'name']
 
-    def validate_name(self, value):
-        if User.objects.filter(name=value).exists():
-            raise ValidationError('Usuário já existe')
-        return value
-
 
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:

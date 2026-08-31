@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: Projeto de Integração
+  version: 1.0.0
+  description: A ideia desse projeto é aprender a utilizar as principais tecnologias
+    do VisionAI
+paths:
+  /api/login/{user_name}/:
+    post:
+      operationId: login_create
+      parameters:
+      - in: path
+        name: user_name
+        schema:
+          type: string
+        required: true
+      tags:
+      - login
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/room/:
+    get:
+      operationId: room_retrieve
+      tags:
+      - room
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: room_create
+      tags:
+      - room
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/room/{room_name}/messages/:
+    get:
+      operationId: room_messages_retrieve
+      parameters:
+      - in: path
+        name: room_name
+        schema:
+          type: string
+        required: true
+      tags:
+      - room
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/room/{room_name}/users/:
+    post:
+      operationId: room_users_create
+      parameters:
+      - in: path
+        name: room_name
+        schema:
+          type: string
+        required: true
+      tags:
+      - room
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/user/:
+    get:
+      operationId: user_retrieve
+      tags:
+      - user
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: user_create
+      tags:
+      - user
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
